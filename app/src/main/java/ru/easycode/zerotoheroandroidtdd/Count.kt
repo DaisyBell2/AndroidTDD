@@ -9,21 +9,21 @@ interface Count {
 
     class Base(private val step: Int, private val max: Int) : Count {
         init {
-            if (step <= 0)
+            if (step < 1)
                 throw IllegalStateException("step should be positive, but was $step")
-            else if (max <= 0)
+            if (max < 1)
                 throw IllegalStateException("max should be positive, but was $max")
-            else if (step > max)
+            if (max < step)
                 throw IllegalStateException("max should be more than step")
         }
 
         override fun increment(number: String): UiState {
-            val result = (number.toInt() + step).toString()
-            return if (result.toInt() + step > max)
-                UiState.Max(result)
+            val digits = number.toInt()
+            val result = digits + step
+            return if (result + step > max)
+                UiState.Max(result.toString())
             else
-                UiState.Base(result)
+                UiState.Base(result.toString())
         }
-
     }
 }
