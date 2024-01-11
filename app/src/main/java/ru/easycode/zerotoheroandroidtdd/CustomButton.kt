@@ -5,12 +5,12 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.View
-import androidx.appcompat.widget.AppCompatButton
+import com.google.android.material.button.MaterialButton
 
 /**
  * @author DaisyBell on 26.10.2023
  */
-class CustomButton : AppCompatButton {
+class CustomButton : MaterialButton {
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
@@ -20,7 +20,7 @@ class CustomButton : AppCompatButton {
         defStyleAttr
     )
 
-    override fun onSaveInstanceState(): Parcelable? = super.onSaveInstanceState()?.let {
+    override fun onSaveInstanceState(): Parcelable = super.onSaveInstanceState().let {
         val visibilityState = VisibilityState(it)
         visibilityState.enabled = isEnabled
         return visibilityState
