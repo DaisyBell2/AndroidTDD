@@ -2,6 +2,7 @@ package ru.easycode.zerotoheroandroidtdd
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import ru.easycode.zerotoheroandroidtdd.databinding.ViewItemBinding
@@ -21,9 +22,11 @@ class ItemsAdapter : RecyclerView.Adapter<ItemsViewHolder>() {
     }
 
     fun update(newList: List<CharSequence>) {
+        val diffUtil = DiffUtilCallback(list, newList)
+        val diff = DiffUtil.calculateDiff(diffUtil)
         list.clear()
         list.addAll(newList)
-        notifyDataSetChanged()
+        diff.dispatchUpdatesTo(this)
     }
 }
 
